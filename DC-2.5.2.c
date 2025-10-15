@@ -15,7 +15,6 @@ typedef struct LNode
 }LNode,*LinkList;
 
 
-//因为*L是解引用，所以在main中会传入一个变量，我们操作时就是对这个变量进行操作码？
 Status InitList(LinkList *L){
     *L = (LinkList)malloc(sizeof(LNode));
 
@@ -26,7 +25,32 @@ Status InitList(LinkList *L){
     return OK;
 }
 
+Status GetElem(LinkList L,int i,ElemType *e){
+    int j = 1;
+    LNode *p  = L->next;
+    while (p && j<i)
+    {
+       p = p->next;
+       ++j;
+    }
+    if (!p || j != i){
+        return ERROR;
+    }
+    *e = p->data;
+    return OK;
 
+}
+
+Status LocateElem(LinkList L,ElemType e){
+    LNode *p = L->next;
+    while (p && p->data != e)
+    {
+        p = p->next;
+    }
+    
+    return p;
+
+}
 
 int main(){
 
