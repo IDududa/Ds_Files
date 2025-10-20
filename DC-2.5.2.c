@@ -52,6 +52,39 @@ Status LocateElem(LinkList L,ElemType e){
 
 }
 
+Status ListInsert(LinkList L,int i,ElemType e){
+    LNode *p = L;
+    int j = 0;
+    while (p && (j<i-1))
+    {
+       p = p->next;
+       ++j;
+    }
+    if(!p || j>i-1){
+        return ERROR;
+    }
+    LNode *s = (LNode *)malloc(sizeof(LNode));
+    s->data = e;
+    s->next = p->next;
+    p->next = s;
+    return OK;
+}
+
+Status ListDelete(LinkList L,int i){
+    LNode *p = L;
+    int j = 0;
+    while(p && j<i-1){
+        p = p->next;
+    }
+    if(!p ||j >i-1){
+        return ERROR;
+    }
+    LNode *q = p->next;
+    p->next = q->next;
+    free(q);
+    return OK;
+}
+
 int main(){
 
 
