@@ -18,7 +18,7 @@ typedef struct LNode
 Status InitList(LinkList *L){
     *L = (LinkList)malloc(sizeof(LNode));
 
-    if (*L = NULL){
+    if (*L == NULL){
         return ERROR;
     }
     (*L)->next = NULL;
@@ -73,10 +73,11 @@ Status ListInsert(LinkList L,int i,ElemType e){
 Status ListDelete(LinkList L,int i){
     LNode *p = L;
     int j = 0;
-    while(p && j<i-1){
+    while((p->next) && j<i-1){
         p = p->next;
+        ++j;
     }
-    if(!p ||j >i-1){
+    if(!(p->next) ||j >i-1){
         return ERROR;
     }
     LNode *q = p->next;
@@ -84,6 +85,39 @@ Status ListDelete(LinkList L,int i){
     free(q);
     return OK;
 }
+
+void CreateList_H(LinkList *L,int n){
+
+    *L = (LinkList)malloc(sizeof(LNode));
+    (*L)->next = NULL;
+
+    for(int i = 0;i<n;i++){
+
+        LNode *p = (LNode *)malloc(sizeof(LNode));
+
+        if(p == NULL) return OVERFLOW;
+
+        scanf("%d",&(p->data));
+        p->next = (*L)->next;
+        (*L)->next = p;
+    }
+}
+
+void CreateList_T(LinkList *L,int n){
+    *L = (LinkList)malloc(sizeof(LNode));
+    (*L)->next = NULL;
+    LinkList r = *L;
+    for (int i = 0;i<n;i++){
+        LNode *p = (LNode *)malloc(sizeof(LNode));
+        scanf("%d",&(p->data));
+        p->next = NULL;
+        r->next = p;
+        r = p;
+    }
+
+}
+
+
 
 int main(){
 
