@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #define OK 1
 #define ERROR 0
@@ -18,7 +20,7 @@ typedef struct DuLNode
 }DuLNode,*DuLinkList;
 
 //双向链表的插入
-Status ListInsert_DuL(DuLinkList *L,int i,ElemType e){
+Status ListInsert_DuL(DuLinkList L,int i,ElemType e){
 
     DuLNode *p = L;
     int j = 0;
